@@ -1,0 +1,26 @@
+first_category:
+  n_immediate:
+    urgency: immediate
+  n_regular:
+    urgency: regular
+  n_optional:
+    urgency: optional
+  n_onsite:
+    urgency: onsite
+
+second_category:
+  n_target_dependent:
+    target:
+      user:
+        urgency: regular
+      admin:
+        urgency: immediate
+  n_multiple_locales:
+    urgency: regular
+    locale_options: [on_page, on_site]
+
+noncustomizable_category:
+  n_immediate:
+    urgency: immediate
+  n_onsite:
+    urgency: onsite
