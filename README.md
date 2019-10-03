@@ -35,4 +35,4 @@ To store your notifications in database UNotifier uses provided ActiveRecord mod
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitLab at https://gitlab.com/hodl/unotifier.
+Bug reports and pull requests are welcome on GitLab at https://gitlab.com/hodlhodl-public/unotifier.
