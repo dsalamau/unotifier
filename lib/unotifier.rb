@@ -73,7 +73,15 @@ module UNotifier
     end
   end
 
-  def self.notify(key, target, params = {})
+  def self.notify(key, recepients, params = {})
+    targets = recepients.is_a?(Enumerable) ? recepients : [recepients]
+
+    targets.each do |target|
+      notify_target(key, target, params)
+    end
+  end
+
+  def self.notify_target(key, target, params = {})
     user_settings = target.notification_settings[key]
     user_settings ||= Settings::DEFAULT_URGENCY
     locale_key = locale_key_for(key, params)

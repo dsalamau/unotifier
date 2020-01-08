@@ -172,6 +172,29 @@ RSpec.describe UNotifier do
   end
 
   describe "#notify" do
+    before do
+      allow(UNotifier).to receive(:notify_target)
+    end
+
+    let(:key) { "first_category.n_regular" }
+
+    context "when multiple targets passed" do
+      it "send notification to each target" do
+        targets = [target, target]
+        UNotifier.notify(key, targets)
+        expect(UNotifier).to have_received(:notify_target).twice
+      end
+    end
+
+    context "when one target passed" do
+      it "send notification to one target" do
+        UNotifier.notify(key, target)
+        expect(UNotifier).to have_received(:notify_target).once
+      end
+    end
+  end
+
+  describe "#notify_target" do
     let(:key) { "first_category.n_regular" }
     let(:params) { Hash.new }
     let(:user_settings) { "external" }
@@ -179,6 +202,7 @@ RSpec.describe UNotifier do
     before do
       allow(I18n).to receive(:t).and_return("")
       allow(target).to receive(:online?).and_return(true)
+      allow(target).to receive(:respond_to?).and_return(false)
       allow(target).to receive(:locale).and_return(:en)
       allow(target).to receive(:notification_settings).and_return({ key => user_settings })
       allow(notification_entity).to receive(:urgency).and_return(notifications_fixture.dig(*key.split("."), "urgency"))
